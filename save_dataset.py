@@ -19,4 +19,4 @@ out_path_base = 'data/test'
 with open(f'{out_path_base}/texts.pkl', 'wb') as f:
     pickle.dump(texts, f)
 with open(f'{out_path_base}/labels.pkl', 'wb') as f:
-    pickle.dump(texts, f)
+    pickle.dump(labels, f)

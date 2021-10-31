@@ -16,6 +16,7 @@ labels = data['label']
 
 out_path_base = 'data/test'
 
-with open('mypickle.pickle', 'wb') as f:
-pickle.dump(texts, f'{out_path_base}/texts.pkl')
-pickle.dump(labels, f'{out_path_base}/labels.pkl')
+with open(f'{out_path_base}/texts.pkl', 'wb') as f:
+    pickle.dump(texts, f)
+with open(f'{out_path_base}/labels.pkl', 'wb') as f:
+    pickle.dump(texts, f)

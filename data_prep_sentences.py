@@ -38,7 +38,7 @@ class DataRawLoader():
             texts = pickle.load(f)
         with open(f'{base_dir}/labels.pkl', 'rb') as f:
             labels = pickle.load(f)
-        print(texts[:2])
+        labels = [int(label) for label in labels]
         return texts, labels
 
     # def get_train(self):

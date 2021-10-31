@@ -34,9 +34,9 @@ class DataRawLoader():
     def _get_data(self, base_dir='data/test'):
 
 
-        with open(f'{base_dir}/texts.pkl') as f:
+        with open(f'{base_dir}/texts.pkl', 'rb') as f:
             texts = pickle.load(f)
-        with open(f'{base_dir}/labels.pkl') as f:
+        with open(f'{base_dir}/labels.pkl', 'rb') as f:
             labels = pickle.load(f)
         print(texts[:2])
         return texts, labels

@@ -126,7 +126,6 @@ if __name__ == '__main__':
     # Get command line arguments
     commandLineParser = argparse.ArgumentParser()
     commandLineParser.add_argument('MODEL', type=str, help='trained .th model')
-    commandLineParser.add_argument('DATA_PATH', type=str, help='data filepath')
     commandLineParser.add_argument('--max_syn', type=int, default=10, help="Number of synonyms to search")
     commandLineParser.add_argument('--N', type=int, default=1, help="Number of words to substitute")
     commandLineParser.add_argument('--start_ind', type=int, default=0, help="data point index to start at")
@@ -134,7 +133,6 @@ if __name__ == '__main__':
 
     args = commandLineParser.parse_args()
     model_path = args.MODEL
-    data_path = args.DATA_PATH
     max_syn = args.max_syn
     N = args.N
     start_ind = args.start_ind

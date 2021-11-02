@@ -95,6 +95,8 @@ if __name__ == '__main__':
     num_models = args.num_models
     cpu_use = args.cpu
 
+    NUM_CLASSES = 4
+
     # Save the command run
     if not os.path.isdir('CMDs'):
         os.mkdir('CMDs')
@@ -115,8 +117,8 @@ if __name__ == '__main__':
 
     # Initialise arrays to store all logit information by class
     logits_list = []
-    for i in range(6):
-        logits_list.append(np.zeros((len(data_list), num_models, 2, 6)))
+    for i in range(NUM_CLASSES):
+        logits_list.append(np.zeros((len(data_list), num_models, 2, NUM_CLASSES)))
 
     # Load all the trained models
     models = []
@@ -131,7 +133,7 @@ if __name__ == '__main__':
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
     # Populate the logit information array with model predictions
-    class_lengths = [0]*6
+    class_lengths = [0]*NUM_CLASSES
     for n, item in enumerate(data_list):
         print(f'On {n} of {len(data_list)}')
         original_phrase = item['sentence']
@@ -152,8 +154,8 @@ if __name__ == '__main__':
             class_lengths[class_label] += 1
 
     # Keep only relevant part of each tensor
-    for ind in range(6):
+    for ind in range(NUM_CLASSES):
         logits_list[ind] = logits_list[ind][:class_lengths[ind]]
 
     # Save the logit information array
-    np.savez(out_file, logits_list[0], logits_list[1], logits_list[2], logits_list[3], logits_list[4], logits_list[5])
+    np.savez(out_file, logits_list[0], logits_list[1], logits_list[2], logits_list[3])

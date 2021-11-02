@@ -92,6 +92,8 @@ if __name__ == '__main__':
     num_models = args.num_models
     cpu_use = args.cpu
 
+    NUM_CLASSES = 4
+
     # Save the command run
     if not os.path.isdir('CMDs'):
         os.mkdir('CMDs')
@@ -111,7 +113,7 @@ if __name__ == '__main__':
     data_list = keep_only_success(data_list)
 
     # Initialise array to store all logit information
-    logits = np.zeros((len(data_list), num_models, 2, 6))
+    logits = np.zeros((len(data_list), num_models, 2, NUM_CLASSES))
 
     # Load all the trained models
     models = []

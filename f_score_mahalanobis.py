@@ -57,7 +57,7 @@ if __name__ == '__main__':
     filename = args.FILENAME
     out_file = args.OUT
 
-    NUM_CLASSES = 6
+    NUM_CLASSES = 4
 
     # Save the command run
     if not os.path.isdir('CMDs'):

@@ -30,7 +30,7 @@ import os
 import argparse
 from sklearn.metrics import precision_recall_curve
 import matplotlib.pyplot as plt
-from f_score_uncertainty import get_best_f_score
+from f_score_uncertainty_all import get_best_f_score
 
 
 def calculate_per_class_dist(vector, class_mean, inv_cov):

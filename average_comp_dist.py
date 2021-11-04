@@ -173,43 +173,43 @@ if __name__ == '__main__':
     plt.savefig(out_file)
     plt.clf()
 
-    # Report std diff between attack and original curves
-    original_comps = get_all_comps(original_embeddings, eigenvectors, correction_mean)
-    attack_comps = get_all_comps(attack_embeddings, eigenvectors, correction_mean)
+    # # Report std diff between attack and original curves
+    # original_comps = get_all_comps(original_embeddings, v, correction_mean)
+    # attack_comps = get_all_comps(attack_embeddings, v, correction_mean)
 
-    std_diffs = stds(original_comps, attack_comps)
-    print("OOD metric", torch.mean(std_diffs))
+    # std_diffs = stds(original_comps, attack_comps)
+    # print("OOD metric", torch.mean(std_diffs))
 
-    # Plot std_diffs ranked by size
-    std_diffs_ordered, _ = torch.sort(std_diffs)
-    ranks = np.arange(len(std_diffs_ordered))
+    # # Plot std_diffs ranked by size
+    # std_diffs_ordered, _ = torch.sort(std_diffs)
+    # ranks = np.arange(len(std_diffs_ordered))
     
-    plt.plot(ranks, std_diffs_ordered)
-    plt.xlabel('std difference rank')
-    plt.ylabel('std difference')
-    plt.savefig('std_'+out_file)
-    plt.clf()
+    # plt.plot(ranks, std_diffs_ordered)
+    # plt.xlabel('std difference rank')
+    # plt.ylabel('std difference')
+    # plt.savefig('std_'+out_file)
+    # plt.clf()
 
-    # Determine normalised error sizes in input embedding layer
-    #     - l2
-    #     - l-inf
+    # # Determine normalised error sizes in input embedding layer
+    # #     - l2
+    # #     - l-inf
 
-    handler = Electra_Layer_Handler(model, layer_num=error_layer_num)
+    # handler = Bert_Layer_Handler(model, layer_num=error_layer_num)
 
-    # Get all layer embeddings
-    original_embeddings = get_embeddings_batched(original_list, handler, tokenizer, device)
-    attack_embeddings = get_embeddings_batched(attack_list, handler, tokenizer, device)
+    # # Get all layer embeddings
+    # original_embeddings = get_embeddings_batched(original_list, handler, tokenizer, device)
+    # attack_embeddings = get_embeddings_batched(attack_list, handler, tokenizer, device)
 
-    orig = torch.reshape(torch.abs(original_embeddings), (len(original_list), -1))
-    l2s_orig_avg = torch.mean(torch.sqrt(torch.sum(orig**2, dim=1)))
-    linfs_orig, _ = torch.max(orig, dim=1)
-    linfs_orig_avg = torch.mean(linfs_orig)
+    # orig = torch.reshape(torch.abs(original_embeddings), (len(original_list), -1))
+    # l2s_orig_avg = torch.mean(torch.sqrt(torch.sum(orig**2, dim=1)))
+    # linfs_orig, _ = torch.max(orig, dim=1)
+    # linfs_orig_avg = torch.mean(linfs_orig)
 
-    diffs = torch.reshape(torch.abs(attack_embeddings-original_embeddings), (len(attack_list), -1))
+    # diffs = torch.reshape(torch.abs(attack_embeddings-original_embeddings), (len(attack_list), -1))
 
-    l2s = torch.sqrt(torch.sum(diffs**2, dim=1))/l2s_orig_avg
-    print(f'l2: mean={torch.mean(l2s)} std={torch.std(l2s)}')
+    # l2s = torch.sqrt(torch.sum(diffs**2, dim=1))/l2s_orig_avg
+    # print(f'l2: mean={torch.mean(l2s)} std={torch.std(l2s)}')
 
-    linfs, _ = torch.max(diffs, dim=1)
-    linfs = linfs/linfs_orig_avg
-    print(f'l-inf: mean={torch.mean(linfs)} std={torch.std(linfs)}')
+    # linfs, _ = torch.max(diffs, dim=1)
+    # linfs = linfs/linfs_orig_avg
+    # print(f'l-inf: mean={torch.mean(linfs)} std={torch.std(linfs)}')
